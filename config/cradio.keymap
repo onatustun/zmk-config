@@ -10,7 +10,7 @@
         commaqmrk: commaqmrk {
             compatible = "zmk,behavior-mod-morph";
             label = "COMMAQMRK";
-            bindings = <&kp KP_COMMA>, <&kp QUESTION>;
+            bindings = <&kp COMMA>, <&kp QUESTION>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -19,7 +19,7 @@
         dotless: dotless {
             compatible = "zmk,behavior-mod-morph";
             label = "DOTLESS";
-            bindings = <&kp KP_DOT>, <&kp LESS_THAN>;
+            bindings = <&kp PERIOD>, <&kp LESS_THAN>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -28,7 +28,7 @@
         slashgreater: slashgreater {
             compatible = "zmk,behavior-mod-morph";
             label = "SLASHGREATER";
-            bindings = <&kp KP_SLASH>, <&kp GREATER_THAN>;
+            bindings = <&kp SLASH>, <&kp GREATER_THAN>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
