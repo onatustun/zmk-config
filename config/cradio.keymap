@@ -100,6 +100,15 @@
                         &trans   &trans     &trans  &trans
             >;
         };
+
+        layer_7 {
+            bindings = <
+&kp X  &kp L  &kp D  &kp P   &kp G     &kp Z   &kp K   &kp O     &kp U      &kp SEMI
+&kp N  &kp R  &kp T  &kp S   &kp W     &kp Y   &kp H   &kp E     &kp I      &kp A
+&kp Q  &kp J  &kp M  &kp C   &kp V     &kp B   &kp F   &kp APOS  &kp COMMA  &kp DOT
+                     &trans  &trans    &trans  &trans
+            >;
+        };
     };
 
     conditional_layers {
