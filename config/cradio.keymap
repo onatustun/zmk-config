@@ -6,53 +6,24 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    behaviors {
-        commaqmrk: commaqmrk {
-            compatible = "zmk,behavior-mod-morph";
-            label = "COMMAQMRK";
-            bindings = <&kp COMMA>, <&kp QUESTION>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        dotless: dotless {
-            compatible = "zmk,behavior-mod-morph";
-            label = "DOTLESS";
-            bindings = <&kp PERIOD>, <&kp LESS_THAN>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        slashgreater: slashgreater {
-            compatible = "zmk,behavior-mod-morph";
-            label = "SLASHGREATER";
-            bindings = <&kp SLASH>, <&kp GREATER_THAN>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         layer_0 {
             bindings = <
-&kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I       &kp O     &kp P
-&kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K       &kp L     &kp SEMI
-&kp Z  &kp X  &kp C  &kp V  &kp B        &kp N      &kp M  &commaqmrk  &dotless  &slashgreater
+&kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I     &kp O      &kp P
+&kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K     &kp L      &kp SEMI
+&kp Z  &kp X  &kp C  &kp V  &kp B        &kp N      &kp M  &kp APOS  &kp COMMA  &kp DOT
                      &mo 2  &kp LSHFT    &kp SPACE  &mo 1
             >;
         };
 
         layer_1 {
             bindings = <
-&kp GRAVE  &kp APOS  &none   &none   &none     &none   &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT
-&kp N1     &kp N2    &kp N3  &kp N4  &kp N5    &kp N6  &kp N7     &kp N8     &kp N9    &kp N0
-&kp BSLH   &none     &none   &none   &none     &none   &none      &trans     &trans    &trans
-                             &trans  &trans    &trans  &trans
+&kp GRAVE  &none   &none   &none   &none     &none   &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT
+&kp N1     &kp N2  &kp N3  &kp N4  &kp N5    &kp N6  &kp N7     &kp N8     &kp N9    &kp N0
+&kp BSLH   &none   &none   &none   &none     &none   &kp FSLH   &trans     &trans    &trans
+                           &trans  &trans    &trans  &trans
             >;
         };
 
@@ -95,7 +66,7 @@
         layer_6 {
             bindings = <
 &none  &kp F1  &kp F2   &kp F3   &kp F4     &none   &bt BT_PRV  &bt BT_NXT      &none  &none
-&none  &kp F5  &kp F6   &kp F7   &kp F8     &none   &none       &none           &none  &none
+&none  &kp F5  &kp F6   &kp F7   &kp F8     &tog 7  &none       &none           &none  &none
 &none  &kp F9  &kp F10  &kp F11  &kp F12    &none   &bt BT_CLR  &bt BT_CLR_ALL  &none  &none
                         &trans   &trans     &trans  &trans
             >;
@@ -103,10 +74,10 @@
 
         layer_7 {
             bindings = <
-&kp X  &kp L  &kp D  &kp P   &kp G     &kp Z   &kp K   &kp O     &kp U      &kp SEMI
-&kp N  &kp R  &kp T  &kp S   &kp W     &kp Y   &kp H   &kp E     &kp I      &kp A
-&kp Q  &kp J  &kp M  &kp C   &kp V     &kp B   &kp F   &kp APOS  &kp COMMA  &kp DOT
-                     &trans  &trans    &trans  &trans
+&kp X  &kp L  &kp D  &kp P  &kp G             &kp Z      &kp K  &kp O     &kp U      &kp SEMI
+&kp N  &kp R  &kp T  &kp S  &kp W             &kp Y      &kp H  &kp E     &kp I      &kp A
+&kp Q  &kp J  &kp M  &kp C  &kp V             &kp B      &kp F  &kp APOS  &kp COMMA  &kp DOT
+                     &mo 2  &kp LEFT_SHIFT    &kp SPACE  &mo 1
             >;
         };
     };
