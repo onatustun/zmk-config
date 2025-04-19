@@ -44,9 +44,9 @@
             compatible = "zmk,behavior-hold-tap";
             label = "GUI_TAP_HOLD";
             tapping-term-ms = <200>;
-            quick-tap-ms = <0>;      // Added semicolon
-            inter-tap-interval-ms = <0>; // Added semicolon
-            bindings = <&sticky_gui>, <&kp KC_LGUI>;
+            quick-tap-ms = <0>;
+            inter-tap-interval-ms = <0>;
+            bindings = <&sticky_gui>, <&kp KC_LGUI>; // Semicolon added here!
         };
     };
 
