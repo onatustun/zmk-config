@@ -44,8 +44,8 @@
             compatible = "zmk,behavior-hold-tap";
             label = "GUI_TAP_HOLD";
             tapping-term-ms = <200>;
-             quick-tap-ms = <0>;
-            inter-tap-interval-ms = <0>;
+            quick-tap-ms = <0>;      // Added semicolon
+            inter-tap-interval-ms = <0>; // Added semicolon
             bindings = <&sticky_gui>, <&kp KC_LGUI>;
         };
     };
@@ -84,7 +84,7 @@
             bindings = <
 &trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans        &trans           &trans
 &trans  &trans  &mkp MB1  &mkp MB2  &mkp MB3    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
-&trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans          &trans         &trans
+&trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans         &trans
                           &trans    &trans      &trans          &trans
             >;
         };
