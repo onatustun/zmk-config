@@ -34,20 +34,14 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        sticky_gui: sticky_gui {
-            compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_GUI";
-            bindings = <&sk KC_LGUI>;
-        };
-
-        gui_tap_hold: gui_tap_hold {
+        sticky_hold: sticky_hold {
             compatible = "zmk,behavior-hold-tap";
-            label = "GUI_TAP_HOLD";
+            label = "STICKY_HOLD";
             tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
             inter-tap-interval-ms = <0>;
-            bindings = <&sticky_gui>, <&kp KC_LGUI>;
- // Semicolon added here!
+            bindings = <&kp>, <&sk>;
+
+            // Semicolon added here!
         };
     };
 
@@ -74,10 +68,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &sk LEFT_ALT  &sk LCTRL  &gui_tap_hold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3         &mkp MB4   &mkp MB5                         &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none         &none      &none                            &none     &none            &none           &none         &none            &mo 5
-                                  &trans                           &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &sk LEFT_ALT  &sk LCTRL  &sticky_hold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
+&kp ESC  &mo 3         &mkp MB4   &mkp MB5                        &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none         &none      &none                           &none     &none            &none           &none         &none            &mo 5
+                                  &trans                          &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
