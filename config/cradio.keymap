@@ -67,10 +67,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &sk LEFT_ALT  &sk LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3         &mkp MB4   &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none         &none      &none                          &none     &none            &none           &none         &none            &mo 5
-                                  &trans                         &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
+&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none                          &none                    &none                          &none     &none            &none           &none         &none            &mo 5
+                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
