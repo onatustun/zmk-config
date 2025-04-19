@@ -33,6 +33,15 @@
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+
+        stickyhold: stickyhold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKYHOLD";
+            bindings = <&kp>, <&sk>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
     };
 
     keymap {
@@ -40,8 +49,8 @@
 
         layer_0 {
             bindings = <
-&kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I     &kp O      &kp P
-&kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K     &kp L      &kp SEMI
+&kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I       &kp O     &kp P
+&kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K       &kp L     &kp SEMI
 &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N      &kp M  &commaqmrk  &dotless  &slashgreater
                      &mo 2  &kp LSHFT    &kp SPACE  &mo 1
             >;
@@ -58,10 +67,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &sk LEFT_ALT  &sk LCTRL  &sk LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3         &mkp MB4   &mkp MB5      &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none         &none      &none         &none     &none            &none           &none         &none            &mo 5
-                                  &trans        &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &sk LEFT_ALT  &sk LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
+&kp ESC  &mo 3         &mkp MB4   &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none         &none      &none                          &none     &none            &none           &none         &none            &mo 5
+                                  &trans                         &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
@@ -94,10 +103,10 @@
 
         layer_6 {
             bindings = <
-&none  &kp F1  &kp F2   &kp F3   &kp F4     &none   &bt BT_PRV  &bt BT_NXT      &none  &none
-&none  &kp F5  &kp F6   &kp F7   &kp F8     &none   &none       &none           &none  &none
-&none  &kp F9  &kp F10  &kp F11  &kp F12    &none   &bt BT_CLR  &bt BT_CLR_ALL  &none  &none
-                        &trans   &trans     &trans  &trans
+&none   &kp F1  &kp F2   &kp F3   &kp F4     &none   &bt BT_PRV  &bt BT_NXT      &none  &none
+&none   &kp F5  &kp F6   &kp F7   &kp F8     &none   &none       &none           &none  &none
+&trans  &kp F9  &kp F10  &kp F11  &kp F12    &none   &bt BT_CLR  &bt BT_CLR_ALL  &none  &trans
+                         &trans   &trans     &trans  &trans
             >;
         };
     };
