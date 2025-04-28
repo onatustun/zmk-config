@@ -6,6 +6,64 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        
+        combo_ctrl_alt {
+            timeout-ms = <300>;
+            key-positions = <2 1>;
+            bindings = <&sticky_combo_ctrl_alt>;
+        };
+        
+        combo_ctrl_gui {
+            timeout-ms = <300>;
+            key-positions = <2 3>;
+            bindings = <&sticky_combo_ctrl_gui>;
+        };
+        
+        combo_alt_gui {
+            timeout-ms = <300>;
+            key-positions = <1 3>;
+            bindings = <&sticky_combo_alt_gui>;
+        };
+        
+        combo_ctrl_alt_gui {
+            timeout-ms = <300>;
+            key-positions = <2 1 3>;
+            bindings = <&sticky_combo_ctrl_alt_gui>;
+        };
+    };
+    
+    macros {
+        sticky_combo_ctrl_alt: sticky_combo_ctrl_alt {
+            compatible = "zmk,behavior-macro";
+            label = "STICKY_COMBO_CTRL_ALT";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LALT>;
+        };
+        
+        sticky_combo_ctrl_gui: sticky_combo_ctrl_gui {
+            compatible = "zmk,behavior-macro";
+            label = "STICKY_COMBO_CTRL_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LGUI>;
+        };
+        
+        sticky_combo_alt_gui: sticky_combo_alt_gui {
+            compatible = "zmk,behavior-macro";
+            label = "STICKY_COMBO_ALT_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LALT &sk LGUI>;
+        };
+        
+        sticky_combo_ctrl_alt_gui: sticky_combo_ctrl_alt_gui {
+            compatible = "zmk,behavior-macro";
+            label = "STICKY_COMBO_CTRL_ALT_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LALT &sk LGUI>;
+        };
+    };
+
     behaviors {
         commaqmrk: commaqmrk {
             compatible = "zmk,behavior-mod-morph";
