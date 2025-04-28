@@ -12,55 +12,48 @@
         combo_ctrl_alt {
             timeout-ms = <300>;
             key-positions = <2 1>;
-            bindings = <&sticky_combo_ctrl_alt>;
+            bindings = <&combo_mod_morph LCTRL LALT>;
+            layers = <2>; // Only active on layer 2
         };
         
         combo_ctrl_gui {
             timeout-ms = <300>;
             key-positions = <2 3>;
-            bindings = <&sticky_combo_ctrl_gui>;
+            bindings = <&combo_mod_morph LCTRL LGUI>;
+            layers = <2>; // Only active on layer 2
         };
         
         combo_alt_gui {
             timeout-ms = <300>;
             key-positions = <1 3>;
-            bindings = <&sticky_combo_alt_gui>;
+            bindings = <&combo_mod_morph LALT LGUI>;
+            layers = <2>; // Only active on layer 2
         };
         
         combo_ctrl_alt_gui {
             timeout-ms = <300>;
             key-positions = <2 1 3>;
-            bindings = <&sticky_combo_ctrl_alt_gui>;
+            bindings = <&combo_mod_morph_triple LCTRL LALT LGUI>;
+            layers = <2>; // Only active on layer 2
         };
     };
     
     macros {
-        sticky_combo_ctrl_alt: sticky_combo_ctrl_alt {
+        // Helper macros for the triple modifier case
+        kp_triple: kp_triple {
             compatible = "zmk,behavior-macro";
-            label = "STICKY_COMBO_CTRL_ALT";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sk LCTRL &sk LALT>;
+            label = "KP_TRIPLE";
+            #binding-cells = <3>;
+            bindings = <&macro_press &kp PARAM_1 &kp PARAM_2 &kp PARAM_3>,
+                       <&macro_pause_for_release>,
+                       <&macro_release &kp PARAM_1 &kp PARAM_2 &kp PARAM_3>;
         };
         
-        sticky_combo_ctrl_gui: sticky_combo_ctrl_gui {
+        sk_triple: sk_triple {
             compatible = "zmk,behavior-macro";
-            label = "STICKY_COMBO_CTRL_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sk LCTRL &sk LGUI>;
-        };
-        
-        sticky_combo_alt_gui: sticky_combo_alt_gui {
-            compatible = "zmk,behavior-macro";
-            label = "STICKY_COMBO_ALT_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sk LALT &sk LGUI>;
-        };
-        
-        sticky_combo_ctrl_alt_gui: sticky_combo_ctrl_alt_gui {
-            compatible = "zmk,behavior-macro";
-            label = "STICKY_COMBO_CTRL_ALT_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sk LCTRL &sk LALT &sk LGUI>;
+            label = "SK_TRIPLE";
+            #binding-cells = <3>;
+            bindings = <&macro_tap &sk PARAM_1 &sk PARAM_2 &sk PARAM_3>;
         };
     };
 
@@ -99,6 +92,24 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+        };
+        
+        combo_mod_morph: combo_mod_morph {
+            compatible = "zmk,behavior-hold-tap";
+            label = "COMBO_MOD_MORPH";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&sk>;
+        };
+
+        combo_mod_morph_triple: combo_mod_morph_triple {
+            compatible = "zmk,behavior-hold-tap";
+            label = "COMBO_MOD_MORPH_TRIPLE";
+            #binding-cells = <3>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp_triple>, <&sk_triple>;
         };
     };
 
