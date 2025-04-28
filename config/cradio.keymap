@@ -133,28 +133,28 @@
         compatible = "zmk,combos";
         
         combo_ctrl_alt {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 1>; // Ctrl and Alt positions
             bindings = <&sk_ctrl_alt>;
             layers = <2>; // Only active on layer 2
         };
         
         combo_ctrl_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 3>; // Ctrl and GUI positions
             bindings = <&sk_ctrl_gui>;
             layers = <2>; // Only active on layer 2
         };
         
         combo_alt_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <1 3>; // Alt and GUI positions
             bindings = <&sk_alt_gui>;
             layers = <2>; // Only active on layer 2
         };
         
         combo_ctrl_alt_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 1 3>; // Ctrl, Alt, and GUI positions
             bindings = <&sk_ctrl_alt_gui>;
             layers = <2>; // Only active on layer 2
@@ -162,7 +162,7 @@
         
         // Hold combos for regular modifiers
         hold_combo_ctrl_alt {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 1>; // Ctrl and Alt positions
             bindings = <&ctrl_alt_combo>;
             layers = <2>; // Only active on layer 2
@@ -170,7 +170,7 @@
         };
         
         hold_combo_ctrl_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 3>; // Ctrl and GUI positions
             bindings = <&ctrl_gui_combo>;
             layers = <2>; // Only active on layer 2
@@ -178,7 +178,7 @@
         };
         
         hold_combo_alt_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <1 3>; // Alt and GUI positions
             bindings = <&alt_gui_combo>;
             layers = <2>; // Only active on layer 2
@@ -186,7 +186,7 @@
         };
         
         hold_combo_ctrl_alt_gui {
-            timeout-ms = <300>;
+            timeout-ms = <100>;
             key-positions = <2 1 3>; // Ctrl, Alt, and GUI positions
             bindings = <&ctrl_alt_gui_combo>;
             layers = <2>; // Only active on layer 2
