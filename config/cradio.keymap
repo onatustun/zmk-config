@@ -6,76 +6,11 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        ctrlgui {
-            timeout-ms = <300>;
-            key-positions = <2 3>;
-            bindings = <&ctrlguimacro>;
-            layers = <2>; // Only active on layer 2
-        };
-
-        ctrlalt {
-            bindings = <&ctrlaltmacro>;
-            key-positions = <2 1>;
-            timeout-ms = <300>;
-            layers = <2>;
-        };
-
-        altgui {
-            bindings = <&altguimacro>;
-            key-positions = <1 3>;
-            timeout-ms = <300>;
-            layers = <2>;
-        };
-
-        meh {
-            bindings = <&mehmacro>;
-            key-positions = <1 3 2>;
-            timeout-ms = <300>;
-            layers = <2>;
-        };
-    };
-
-    macros {
-        // Helper macros for the triple modifier case
-
-        ctrlguimacro: ctrlguimacro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&stickyhold LCTRL LCTRL &stickyhold LEFT_GUI LEFT_GUI>;
-            label = "CTRLGUIMACRO";
-        };
-
-        ctrlaltmacro: ctrlaltmacro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&stickyhold LCTRL LCTRL &stickyhold LEFT_ALT LEFT_ALT>;
-            label = "CTRLALTMACRO";
-        };
-
-        altguimacro: altguimacro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&stickyhold LEFT_ALT LEFT_ALT &stickyhold LEFT_GUI LEFT_GUI>;
-            label = "ALTGUIMACRO";
-        };
-
-        mehmacro: mehmacro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&stickyhold LEFT_ALT LEFT_ALT &stickyhold LEFT_GUI LEFT_GUI &stickyhold LEFT_CONTROL LEFT_CONTROL>;
-            label = "MEHMACRO";
-        };
-    };
-
     behaviors {
         commaqmrk: commaqmrk {
             compatible = "zmk,behavior-mod-morph";
             label = "COMMAQMRK";
             bindings = <&kp COMMA>, <&kp QUESTION>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -84,7 +19,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "DOTLESS";
             bindings = <&kp PERIOD>, <&kp LESS_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -93,7 +27,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "SLASHGREATER";
             bindings = <&kp SLASH>, <&kp GREATER_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -102,9 +35,97 @@
             compatible = "zmk,behavior-hold-tap";
             label = "STICKYHOLD";
             bindings = <&kp>, <&sk>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+        };
+        
+        // Hold for regular modifier, tap for sticky
+        alt_mod: alt_mod {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ALT_MOD";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LALT>, <&sk LALT>;
+        };
+        
+        ctrl_mod: ctrl_mod {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CTRL_MOD";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LCTRL>, <&sk LCTRL>;
+        };
+        
+        gui_mod: gui_mod {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GUI_MOD";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LGUI>, <&sk LGUI>;
+        };
+        
+        // Mod-morphs for detecting multiple modifiers
+        alt_morph: alt_morph {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ALT_MORPH";
+            #binding-cells = <0>;
+            bindings = <&alt_mod>, <&sk_ctrl_alt>;
+            mods = <(MOD_LCTL)>;
+        };
+        
+        ctrl_morph: ctrl_morph {
+            compatible = "zmk,behavior-mod-morph";
+            label = "CTRL_MORPH";
+            #binding-cells = <0>;
+            bindings = <&ctrl_mod>, <&sk_ctrl_gui>;
+            mods = <(MOD_LGUI)>;
+        };
+        
+        gui_morph: gui_morph {
+            compatible = "zmk,behavior-mod-morph";
+            label = "GUI_MORPH";
+            #binding-cells = <0>;
+            bindings = <&gui_mod>, <&sk_alt_gui>;
+            mods = <(MOD_LALT)>;
+        };
+        
+        // For triple modifiers
+        ctrl_alt_morph: ctrl_alt_morph {
+            compatible = "zmk,behavior-mod-morph";
+            label = "CTRL_ALT_MORPH";
+            #binding-cells = <0>;
+            bindings = <&sk_ctrl_alt>, <&sk_ctrl_alt_gui>;
+            mods = <(MOD_LGUI)>;
+        };
+    };
+    
+    macros {
+        sk_ctrl_alt: sk_ctrl_alt {
+            compatible = "zmk,behavior-macro";
+            label = "SK_CTRL_ALT";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LALT>;
+        };
+        
+        sk_alt_gui: sk_alt_gui {
+            compatible = "zmk,behavior-macro";
+            label = "SK_ALT_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LALT &sk LGUI>;
+        };
+        
+        sk_ctrl_gui: sk_ctrl_gui {
+            compatible = "zmk,behavior-macro";
+            label = "SK_CTRL_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LGUI>;
+        };
+        
+        sk_ctrl_alt_gui: sk_ctrl_alt_gui {
+            compatible = "zmk,behavior-macro";
+            label = "SK_CTRL_ALT_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &sk LCTRL &sk LALT &sk LGUI>;
         };
     };
 
@@ -131,10 +152,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none                          &none                    &none                          &none     &none            &none           &none         &none            &mo 5
-                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &alt_morph  &ctrl_morph  &gui_morph  &none     &none            &none           &none         &none            &kp BACKSPACE
+&kp ESC  &mo 3       &mkp MB4     &mkp MB5    &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none       &none        &none       &none     &none            &none           &none         &none            &mo 5
+                                  &trans      &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
