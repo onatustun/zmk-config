@@ -11,7 +11,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "COMMAQMRK";
             bindings = <&kp COMMA>, <&kp QUESTION>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -20,7 +19,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "DOTLESS";
             bindings = <&kp PERIOD>, <&kp LESS_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -29,20 +27,51 @@
             compatible = "zmk,behavior-mod-morph";
             label = "SLASHGREATER";
             bindings = <&kp SLASH>, <&kp GREATER_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        // Custom sticky key behavior that ignores modifier keys
+        sk_mod: sticky_key_modifier {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_KEY_MODIFIER";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            // Standard sticky key behavior but with longer release-after-ms
+            release-after-ms = <1000>;
+            // These are the key positions of your modifier keys that should not
+            // cancel the sticky effect - positions from your layer_2
+            ignore-key-positions = <1 2 3>;
+            quick-release;
+        };
+
+        // Updated stickyhold behavior that uses our custom sticky key
         stickyhold: stickyhold {
             compatible = "zmk,behavior-hold-tap";
             label = "STICKYHOLD";
-            bindings = <&kp>, <&sk>;
-
+            bindings = <&kp>, <&sk_mod>;
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            hold-trigger-key-positions = <3 2 1>;
+            tapping-term-ms = <200>;
             quick-tap-ms = <125>;
+            flavor = "balanced";
+        };
+
+        // Additional combo behaviors for common modifier combinations
+        ctrl_gui: ctrl_gui {
+            compatible = "zmk,behavior-tap-dance";
+            label = "CTRL_GUI";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&sk_mod LCTRL>, <&sk_mod LGUI>, <&sk_both_cg>;
+        };
+
+        sk_both_cg: sticky_both_ctrl_gui {
+            compatible = "zmk,behavior-macro";
+            label = "SK_BOTH_CTRL_GUI";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LGUI>,
+                       <&macro_pause_for_release>,
+                       <&macro_release &kp LCTRL &kp LGUI>;
         };
     };
 
@@ -69,10 +98,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none                          &none                    &none                          &none     &none            &none           &none         &none            &mo 5
-                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &stickyhold LALT LALT  &stickyhold LCTRL LCTRL  &stickyhold LGUI LGUI  &ctrl_gui    &none            &none           &none         &none            &kp BACKSPACE
+&kp ESC  &mo 3                  &mkp MB4                 &mkp MB5                &none        &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none                  &none                    &none                   &none        &none            &none           &none         &none            &mo 5
+                                                         &trans                  &trans       &kp RIGHT_SHIFT  &trans
             >;
         };
 
