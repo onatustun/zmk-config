@@ -34,82 +34,19 @@
         stickyhold: stickyhold {
             compatible = "zmk,behavior-hold-tap";
             label = "STICKYHOLD";
-            bindings = <&kp>, <&sk>;
+            bindings = <&kp>, <&skm>;  // Using skm instead of sk
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
         
-        // New behavior for sticky key with quick release
-        sticky_quick: sticky_quick {
+        // Sticky key with masked mods
+        skm: skm {
             compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_QUICK";
+            label = "STICKY_KEY_MASKED";
             #binding-cells = <1>;
             bindings = <&kp>;
             release-after-ms = <1000>;
-            quick-release;
-        };
-    };
-    
-    macros {
-        // Macros for sticky key combinations
-        sk_ctrl_alt: sk_ctrl_alt {
-            compatible = "zmk,behavior-macro";
-            label = "SK_CTRL_ALT";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sticky_quick LCTRL &sticky_quick LALT>;
-        };
-        
-        sk_alt_gui: sk_alt_gui {
-            compatible = "zmk,behavior-macro";
-            label = "SK_ALT_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sticky_quick LALT &sticky_quick LGUI>;
-        };
-        
-        sk_ctrl_gui: sk_ctrl_gui {
-            compatible = "zmk,behavior-macro";
-            label = "SK_CTRL_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sticky_quick LCTRL &sticky_quick LGUI>;
-        };
-        
-        sk_ctrl_alt_gui: sk_ctrl_alt_gui {
-            compatible = "zmk,behavior-macro";
-            label = "SK_CTRL_ALT_GUI";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &sticky_quick LCTRL &sticky_quick LALT &sticky_quick LGUI>;
-        };
-    };
-    
-    combos {
-        compatible = "zmk,combos";
-        
-        combo_ctrl_alt {
-            timeout-ms = <125>;
-            key-positions = <2 1>;
-            bindings = <&sk_ctrl_alt>;
-            layers = <2>;
-        };
-        
-        combo_ctrl_gui {
-            timeout-ms = <125>;
-            key-positions = <2 3>;
-            bindings = <&sk_ctrl_gui>;
-            layers = <2>;
-        };
-        
-        combo_alt_gui {
-            timeout-ms = <125>;
-            key-positions = <1 3>;
-            bindings = <&sk_alt_gui>;
-            layers = <2>;
-        };
-        
-        combo_ctrl_alt_gui {
-            timeout-ms = <125>;
-            key-positions = <2 1 3>;
-            bindings = <&sk_ctrl_alt_gui>;
-            layers = <2>;
+            ignore-modifiers;  // This is the key setting for masked mods
         };
     };
 
