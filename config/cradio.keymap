@@ -11,7 +11,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "COMMAQMRK";
             bindings = <&kp COMMA>, <&kp QUESTION>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -20,7 +19,6 @@
             compatible = "zmk,behavior-mod-morph";
             label = "DOTLESS";
             bindings = <&kp PERIOD>, <&kp LESS_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -29,39 +27,53 @@
             compatible = "zmk,behavior-mod-morph";
             label = "SLASHGREATER";
             bindings = <&kp SLASH>, <&kp GREATER_THAN>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        // Hold-tap behaviors for modifiers
+        sh_lctrl: sticky_hold_lctrl {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_HOLD_LCTRL";
+            bindings = <&kp LCTRL>, <&sk LCTRL>; // Hold sends LCTRL, tap sends sticky LCTRL
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+            // ignore-modifiers is true by default for sticky keys,
+            // allowing combination of sticky modifiers.
+        };
+
+        sh_lalt: sticky_hold_lalt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_HOLD_LALT";
+            bindings = <&kp LALT>, <&sk LALT>; // Hold sends LALT, tap sends sticky LALT
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+        };
+
+        sh_lshift: sticky_hold_lshift {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_HOLD_LSHIFT";
+            bindings = <&kp LSHFT>, <&sk LSHFT>; // Hold sends LSHFT, tap sends sticky LSHFT
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+        };
+
+        sh_lgui: sticky_hold_lgui {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_HOLD_LGUI";
+            bindings = <&kp LGUI>, <&sk LGUI>; // Hold sends LGUI, tap sends sticky LGUI
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+        };
+
+        // Your existing stickyhold behavior (consider if you still need this
+        // or if the specific modifier behaviors are sufficient)
         stickyhold: stickyhold {
             compatible = "zmk,behavior-hold-tap";
             label = "STICKYHOLD";
-            bindings = <&kp>, <&skq>;
-
+            bindings = <&kp>, <&sk>;
             #binding-cells = <2>;
             tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-        };
-        
-        // Group-aware sticky keys
-        skq: sticky_key_quick_release {
-            compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_KEY_QUICK_RELEASE";
-            bindings = <&kp>;
-            #binding-cells = <1>;
-            release-after-ms = <1000>;
-            quick-release;
-            ignore-modifiers;
-        };
-        
-        // Double-tap sticky key to toggle
-        skqt: sticky_key_toggle {
-            compatible = "zmk,behavior-tap-dance";
-            label = "STICKY_KEY_TOGGLE";
-            #binding-cells = <1>;
-            tapping-term-ms = <200>;
-            bindings = <&skq>, <&kt>;
         };
     };
 
@@ -73,7 +85,7 @@
 &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I       &kp O     &kp P
 &kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K       &kp L     &kp SEMI
 &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N      &kp M  &commaqmrk  &dotless  &slashgreater
-                     &mo 2  &kp LSHFT    &kp SPACE  &mo 1
+                     &mo 2  &sh_lshift   &kp SPACE  &mo 1 // Using sticky_hold_lshift for Left Shift
             >;
         };
 
@@ -88,10 +100,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &none           &none         &none            &kp BACKSPACE
-&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none                          &none                    &none                          &none     &none            &none           &none         &none            &mo 5
-                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &sh_lalt  &sh_lctrl  &sh_lgui  &none     &none            &none           &none         &none            &kp BACKSPACE // Using sticky_hold for modifiers
+&kp ESC  &mo 3     &mkp MB4   &mkp MB5  &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none     &none      &none     &none     &none            &none           &none         &none            &mo 5
+                             &trans    &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
@@ -132,13 +144,6 @@
         };
     };
 
-    sticky_key_groups {
-        compatible = "zmk,sticky-key-groups";
-        modifier_group {
-            modifiers = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>;
-        };
-    };
-    
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
