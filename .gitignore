@@ -1,5 +1,7 @@
-/.west
-/modules
-/zephyr
-/zmk
-/build
+*
+
+!.gitignore
+!.github/*
+!config/*
+!flake.lock
+!*.nix
