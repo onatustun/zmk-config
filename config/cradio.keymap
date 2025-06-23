@@ -33,15 +33,6 @@
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
-        stickyhold: stickyhold {
-            compatible = "zmk,behavior-hold-tap";
-            label = "STICKYHOLD";
-            bindings = <&kp>, <&sk>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <300>;
-        };
     };
 
     keymap {
@@ -67,10 +58,10 @@
 
         layer_2 {
             bindings = <
-&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &kp MINUS       &kp EQUAL     &none            &kp BACKSPACE
-&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 4    &none                          &none                    &none                          &none     &none            &none           &none         &none            &mo 5
-                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
+&kp TAB  &mt LEFT_ALT LEFT_ALT  &mt LCTRL LCTRL  &mt LEFT_GUI LEFT_GUI  &none     &none            &kp MINUS       &kp EQUAL     &none            &kp BACKSPACE
+&kp ESC  &mo 3                  &mkp MB4         &mkp MB5               &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none                  &none            &none                  &none     &none            &none           &commaqmrk    &dotless         &mo 5
+                                                 &trans                 &trans    &kp RIGHT_SHIFT  &trans
             >;
         };
 
@@ -103,10 +94,19 @@
 
         layer_6 {
             bindings = <
-&none   &kp F1  &kp F2   &kp F3   &kp F4     &none   &bt BT_PRV  &bt BT_NXT      &none  &none
-&none   &kp F5  &kp F6   &kp F7   &kp F8     &none   &none       &none           &none  &none
-&trans  &kp F9  &kp F10  &kp F11  &kp F12    &none   &bt BT_CLR  &bt BT_CLR_ALL  &none  &trans
-                         &trans   &trans     &trans  &trans
+&kp TAB     &kp LALT        &kp LCTRL   &kp LGUI    &kp LSHFT     &kp F1  &kp F2   &kp F3   &kp F4   &kp DELETE
+&kp ESCAPE  &none           &tog 0      &tog 7      &none         &kp F5  &kp F6   &kp F7   &kp F8   &kp RETURN
+&trans      &bt BT_CLR_ALL  &bt BT_CLR  &bt BT_PRV  &bt BT_NXT    &kp F9  &kp F10  &kp F11  &kp F12  &trans
+                                        &trans      &trans        &trans  &trans
+            >;
+        };
+
+        layer_7 {
+            bindings = <
+&kp X  &kp L  &kp D  &kp P  &kp G        &kp Z      &kp K  &kp O       &kp U     &kp SEMI
+&kp N  &kp R  &kp T  &kp S  &kp W        &kp Y      &kp H  &kp E       &kp I     &kp A
+&kp Q  &kp J  &kp M  &kp C  &kp V        &kp B      &kp F  &commaqmrk  &dotless  &slashgreater
+                     &mo 2  &kp LSHFT    &kp SPACE  &mo 1
             >;
         };
     };
