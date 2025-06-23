@@ -104,7 +104,7 @@
         layer_6 {
             bindings = <
 &kp TAB     &kp LALT        &kp LCTRL   &kp LGUI    &kp LSHFT     &kp F1  &kp F2   &kp F3   &kp F4   &kp DELETE
-&kp ESCAPE  &none           &tog 0      &tog 7      &none         &kp F5  &kp F6   &kp F7   &kp F8   &kp RETURN
+&kp ESCAPE  &none           &to 0       &to 7       &none         &kp F5  &kp F6   &kp F7   &kp F8   &kp RETURN
 &trans      &bt BT_CLR_ALL  &bt BT_CLR  &bt BT_PRV  &bt BT_NXT    &kp F9  &kp F10  &kp F11  &kp F12  &trans
                                         &trans      &trans        &trans  &trans
             >;
