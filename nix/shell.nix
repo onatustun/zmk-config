@@ -19,8 +19,6 @@
           inputs'.zmk-nix.devShells.default
           self'.packages.default
         ];
-
-        packages = [pkgs.keymap-drawer];
       };
 
       zmk-nix = inputs'.zmk-nix.devShells.default;
