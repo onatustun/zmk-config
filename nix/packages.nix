@@ -1,10 +1,25 @@
 {inputs, ...}: {
   perSystem = {
+    pkgs,
+    lib,
     self',
     inputs',
-    lib,
     ...
-  }: {
+  }: let
+    importYAML = yamlPath: let
+      jsonFile =
+        pkgs.runCommand "converted.json"
+        {nativeBuildInputs = [pkgs.yq-go];} ''
+          yq -o json "${yamlPath}" > "$out"
+        '';
+    in
+      lib.strings.fromJSON (lib.strings.readFile jsonFile);
+
+    buildFile = importYAML ../build.yaml;
+    build = lib.lists.head buildFile.include;
+    shieldParts = lib.lists.init (lib.strings.splitString "_" build.shield);
+    shield = "${lib.strings.concatStringsSep "_" shieldParts}_%PART%";
+  in {
     packages = {
       default = self'.packages.firmware;
 
@@ -19,8 +34,8 @@
             ".yml"
           ];
 
-        board = "nice_nano_v2";
-        shield = "cradio_%PART%";
+        inherit (build) board;
+        inherit shield;
         zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
 
         meta = {
@@ -30,8 +45,11 @@
         };
       };
 
-      flash = inputs'.zmk-nix.packages.flash.override {inherit (self'.packages) firmware;};
       inherit (inputs'.zmk-nix.packages) update;
+
+      flash =
+        inputs'.zmk-nix.packages.flash.override
+        {inherit (self'.packages) firmware;};
     };
   };
 }
