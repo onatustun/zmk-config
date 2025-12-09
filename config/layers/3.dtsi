@@ -1,0 +1,9 @@
+layer_3 {
+	label = "3";
+    bindings = <
+&trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans        &trans           &trans
+&trans  &trans  &mkp MB1  &mkp MB2  &mkp MB3    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
+&trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans        &trans           &trans
+                          &trans    &trans      &trans          &trans
+	>;
+};

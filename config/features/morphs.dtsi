@@ -1,0 +1,26 @@
+commaqmrk: commaqmrk {
+    compatible = "zmk,behavior-mod-morph";
+    label = "COMMAQMRK";
+    bindings = <&kp COMMA>, <&kp QUESTION>;
+
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT | MOD_RSFT)>;
+};
+
+dotless: dotless {
+    compatible = "zmk,behavior-mod-morph";
+    label = "DOTLESS";
+    bindings = <&kp PERIOD>, <&kp LESS_THAN>;
+
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT | MOD_RSFT)>;
+};
+
+slashgreater: slashgreater {
+    compatible = "zmk,behavior-mod-morph";
+    label = "SLASHGREATER";
+    bindings = <&kp SLASH>, <&kp GREATER_THAN>;
+
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT | MOD_RSFT)>;
+};

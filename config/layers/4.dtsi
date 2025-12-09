@@ -1,0 +1,9 @@
+layer_4 {
+	label = "4";
+    bindings = <
+&trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&mo 5   &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &mo 6
+                        &trans  &trans    &trans  &trans
+	>;
+};
