@@ -1,9 +1,0 @@
-layer_2 {
-	label = "2";
-    bindings = <
-&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &kp MINUS       &kp EQUAL     &none            &kp BACKSPACE
-&kp ESC  &mo 4                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
-&mo 5    &none                          &none                    &none                          &none     &none            &none           &commaqmrk    &dotless         &mo 6
-                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
-	>;
-};

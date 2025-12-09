@@ -10,7 +10,7 @@
       jsonFile =
         pkgs.runCommand "converted.json"
         {nativeBuildInputs = [pkgs.yq-go];} ''
-          ${lib.meta.getExe' pkgs.yq-go "yq"} -o json ${yamlPath} > $out
+          yq -o json "${yamlPath}" > "$out"
         '';
     in
       lib.strings.fromJSON (lib.strings.readFile jsonFile);
@@ -30,7 +30,6 @@
           lib.sources.sourceFilesBySuffices
           (inputs.gitignore.lib.gitignoreSource ./..) [
             ".conf"
-            ".dtsi"
             ".keymap"
             ".yml"
           ];
@@ -46,11 +45,11 @@
         };
       };
 
+      inherit (inputs'.zmk-nix.packages) update;
+
       flash =
         inputs'.zmk-nix.packages.flash.override
         {inherit (self'.packages) firmware;};
-
-      inherit (inputs'.zmk-nix.packages) update;
     };
   };
 }

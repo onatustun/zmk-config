@@ -1,8 +1,0 @@
-conditional_layers {
-    compatible = "zmk,conditional-layers";
-
-    bltfn {
-        if-layers = <5 6>;
-        then-layer = <7>;
-    };
-};

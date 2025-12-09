@@ -13,7 +13,6 @@ result/
 !README.md
 
 !*.conf
-!*.dtsi
 !*.keymap
 !*.nix
 !*.yml
