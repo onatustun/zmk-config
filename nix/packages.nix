@@ -36,7 +36,7 @@
 
         inherit (build) board;
         inherit shield;
-        zephyrDepsHash = "sha256-QgWfdHAyk+ltrhxGRfqr/byPhTgYGY+wQZ8F7Ek+PrA=";
+        zephyrDepsHash = "sha256-DwawsaqFBeOqPyAy/aACLooo6OfvhM25qqqqSx/MB1Q=";
 
         meta = {
           description = "ZMK firmware";
