@@ -1,12 +1,17 @@
-{inputs, ...}: {
-  imports = [inputs.git-hooks.flakeModule];
+{
+  partitions.dev.module = {inputs, ...}: {
+    imports = [inputs.git-hooks.flakeModule];
 
-  perSystem.pre-commit = {
-    check.enable = true;
+    perSystem = {config, ...}: {
+      make-shells.zmk = {
+        inputsFrom = [config.pre-commit.devShell];
+        shellHook = config.pre-commit.installationScript;
+      };
 
-    settings.hooks = {
-      flake-checker.enable = true;
-      treefmt.enable = true;
+      pre-commit = {
+        check.enable = true;
+        settings.hooks.flake-checker.enable = true;
+      };
     };
   };
 }

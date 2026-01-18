@@ -1,14 +1,15 @@
 {
   description = "ZMK config";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;}
-    (inputs.import-tree ./nix);
-
-  nixConfig = {
+  nixConfig = rec {
     extra-substituters = ["https://nix-community.cachix.org"];
+    extra-trusted-substituters = extra-substituters;
     extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
-    extra-experimental-features = "nix-command flakes";
+
+    extra-experimental-features = [
+      "flakes"
+      "nix-command"
+    ];
   };
 
   inputs = {
@@ -22,24 +23,11 @@
     systems.url = "github:nix-systems/default";
     import-tree.url = "github:vic/import-tree";
 
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zmk-nix = {
       url = "github:lilyinstarlight/zmk-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
+
+  outputs = inputs: import ./outputs.nix inputs;
 }
