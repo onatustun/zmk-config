@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [inputs.flake-parts.flakeModules.partitions];
 
   partitionedAttrs = {
@@ -6,5 +10,10 @@
     devShells = "dev";
   };
 
-  partitions.dev.extraInputsFlake = ./_dev-inputs;
+  partitions.dev.extraInputs =
+    lib.attrsets.filterAttrs (inputName:
+      lib.trivial.const
+      (!lib.strings.hasPrefix "dep_" inputName))
+    (import inputs.flake-compat
+      {src = ./_dev-inputs;}).outputs.inputs;
 }

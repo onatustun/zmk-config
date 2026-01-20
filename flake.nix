@@ -43,6 +43,13 @@
       repo = "zmk-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-compat = {
+      type = "github";
+      owner = "edolstra";
+      repo = "flake-compat";
+      flake = false;
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./nix);
