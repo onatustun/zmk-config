@@ -13,21 +13,37 @@
   };
 
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    nixpkgs = {
+      type = "tarball";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    };
 
     flake-parts = {
-      url = "github:hercules-ci/flake-parts";
+      type = "github";
+      owner = "hercules-ci";
+      repo = "flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    systems.url = "github:nix-systems/default";
-    import-tree.url = "github:vic/import-tree";
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
+
+    import-tree = {
+      type = "github";
+      owner = "vic";
+      repo = "import-tree";
+    };
 
     zmk-nix = {
-      url = "github:lilyinstarlight/zmk-nix";
+      type = "github";
+      owner = "lilyinstarlight";
+      repo = "zmk-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs: import ./outputs.nix inputs;
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./nix);
 }

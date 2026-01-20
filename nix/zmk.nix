@@ -1,20 +1,12 @@
 {
   perSystem = {
     lib,
-    pkgs,
     self',
     inputs',
     ...
   }: let
     root = ./..;
-
-    build =
-      lib.lists.head
-      (lib.strings.fromJSON (lib.strings.readFile
-        (pkgs.runCommand "converted.json"
-          {nativeBuildInputs = [pkgs.yq-go];} ''
-            yq -o json "${root}/build.yaml" > "$out"
-          ''))).include;
+    build = lib.lists.head (lib.strings.fromJSON (lib.strings.readFile (root + /build.yaml))).include;
   in {
     packages = {
       default = self'.packages.firmware;
