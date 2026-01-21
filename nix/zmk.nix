@@ -55,14 +55,7 @@
       inherit (self'.packages) firmware flash update;
     };
 
-    devShells = {
-      default = self'.devShells.zmk;
-      zmk-nix = inputs'.zmk-nix.devShells.default;
-    };
-
-    make-shells.zmk.inputsFrom = [
-      inputs'.zmk-nix.devShells.default
-      self'.packages.default
-    ];
+    devShells.default = self'.devShells.zmk;
+    make-shells.zmk.inputsFrom = [inputs'.zmk-nix.devShells.default];
   };
 }
