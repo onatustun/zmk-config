@@ -28,7 +28,7 @@
           (lib.lists.init (lib.strings.splitString "_"
               build.shield))}_%PART%";
 
-        zephyrDepsHash = "sha256-DwawsaqFBeOqPyAy/aACLooo6OfvhM25qqqqSx/MB1Q=";
+        zephyrDepsHash = "sha256-/J4KOCKOZQV2oqoy6I3Bzq19OC123K4Y/baKU1M/i6s=";
 
         meta = {
           description = "ZMK firmware";
