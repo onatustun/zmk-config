@@ -6,7 +6,7 @@
     ...
   }: let
     root = ./..;
-    build = lib.lists.head (lib.strings.fromJSON (lib.strings.readFile (root + /build.yaml))).include;
+    build = lib.lists.head (lib.trivial.importJSON (root + /build.yaml)).include;
   in {
     packages = {
       default = self'.packages.firmware;
@@ -28,7 +28,7 @@
           (lib.lists.init (lib.strings.splitString "_"
               build.shield))}_%PART%";
 
-        zephyrDepsHash = "sha256-/J4KOCKOZQV2oqoy6I3Bzq19OC123K4Y/baKU1M/i6s=";
+        zephyrDepsHash = "sha256-+FTVUUnfgHMRLM17GghIdUIEgoAmlQNXm13jPXLR03k=";
 
         meta = {
           description = "ZMK firmware";
